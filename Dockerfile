@@ -1,13 +1,16 @@
-FROM centos
+FROM python:3
 
-RUN yum update -y \
-    && curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" \
-    && yum install python3 -y \
-    && python3 get-pip.py \
-    && pip install flask
+# set a directory for the app
+WORKDIR /usr/src/app
 
-COPY . /src
+# copy all the files to the container
+COPY . .
 
-EXPOSE 80
+# install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD cd /src && python home.py
+# tell the port number the container should expose
+EXPOSE 5000
+
+# run the command
+CMD ["python", "./app.py"]
