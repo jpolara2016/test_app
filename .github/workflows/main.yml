@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Python Flask Application
 
 # Controls when the action will run. 
 on:
@@ -25,8 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-
-
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
@@ -41,13 +39,11 @@ jobs:
         run: echo $GITHUB_WORKSPACE
         shell: bash
         
-      - name: Run tests
-        run: python3 app.py
+#       - name: Run tests
+#         run: python3 app.py
         
-      - name: Tests report
-        run: curl -I "http://0.0.0.0:5000"
-        
-        
+#       - name: Tests report
+#         run: curl -I "http://0.0.0.0:5000"
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
