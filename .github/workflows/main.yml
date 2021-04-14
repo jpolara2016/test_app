@@ -54,3 +54,26 @@ jobs:
           context: .
           push: true
           tags: jpolara2016/test_app:latest
+          
+# Deploy container on ECS          
+  deploy_on_ecs:
+    needs: build_docker_image
+    steps:
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+      - name: Get Task Definition details
+        run: |
+          app_name="test_app"
+          aws s3 ls
+          #cluster_name=`aws ecs list-clusters | grep $app_name | gawk -F "/" '{ print $2 }' | sed 's/"//'`
+          #ecs_service_name=`aws ecs list-services --cluster $cluster_name | gawk -F "/" '{ print $3 }' | sed 's/"//' | sed '/^$/d'`
+          #task_definition_name=`aws ecs list-task-definitions | grep test_app | gawk -F: '{ print $6 }' | gawk -F "/" '{ print $2 }'`
+          #desired_count=`aws ecs describe-services --cluster $cluster_name --services $ecs_service_name | grep desiredCount | tail -n 1 | gawk -F ": " '{ print $2 }' | sed 's/,//'`
+          #aws ecs --region us-east-1 update-service --cluster $cluster_name --service $ecs_service_name --task-definition $task_definition_name --desired-count $desired_count --force-new-deployment
+                
