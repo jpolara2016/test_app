@@ -1,9 +1,9 @@
 # Build, Publish, Deploy Docker Image on ECS cluster
 
 This is a sample Flask application written in Python. The goal here is to create CI/CD pipeline which includes the following steps:
-  1. **Build Docker Image from source code**
+  1. **Build Docker Image from Source Code**
   2. **Publish Docker Image to DockerHub**
-  3. **Clean Up articats**
+  3. **Clean Up Artifacts**
   4. **Deploy container on AWS ECS**
 
 ## Architecture
